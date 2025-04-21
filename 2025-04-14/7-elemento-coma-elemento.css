@@ -1,0 +1,17 @@
+/* Para evitar esto:
+p {
+  color: orange;
+}
+h1 {
+  color: orange;
+}
+*/
+
+h1,
+p {
+  color: orange;
+}
+
+p strong em {
+  background-color: green;
+}

@@ -1,0 +1,15 @@
+.encabezado {
+  background-color: lime;
+}
+
+h1.encabezado {
+  color: orange;
+}
+
+p.encabezado {
+  color: red;
+}
+
+.nombre {
+  background-color: grey;
+}

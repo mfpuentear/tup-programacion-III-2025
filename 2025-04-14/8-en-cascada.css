@@ -1,0 +1,13 @@
+p {
+  color: blue;
+  font-family: serif;
+}
+
+.red {
+  color: #7fcb0d;
+}
+
+#especial {
+  color: green;
+  font-family: Arial;
+}
