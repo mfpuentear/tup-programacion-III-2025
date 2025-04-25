@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Funciones, var, let</title>
+  </head>
+  <body>
+    <script>
+      function rango(a, b) {
+        for (var i = a; i < b; i++) {
+          console.log(i);
+        }
+        // Si funciona
+        console.log("fuera del bucle", i);
+      }
+      //console.log("fuera de la funcion", i);
+      rango(1, 4);
+
+      function rango2(a, b) {
+        for (let i = a; i < b; i++) {
+          console.log(i);
+        }
+        // No funciona
+        console.log("fuera del bucle", i);
+      }
+      //console.log("fuera de la funcion", i);
+      rango2(10, 14);
+    </script>
+  </body>
+</html>

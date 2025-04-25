@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Funciones</title>
+  </head>
+  <body>
+    <script>
+      console.log(suma(11, 11));
+
+      // Funcion comun
+      function suma(a, b) {
+        return a + b;
+      }
+
+      console.log(suma(11, 11));
+
+      // Funcion como variable
+      const suma2 = function nuevaFuncion(a, b) {
+        return a + b;
+      };
+      console.log(suma2(22, 22));
+
+      // Funciones anonimas
+      const suma3 = function (a, b) {
+        return a + b;
+      };
+      console.log(suma3(33, 33));
+
+      // Funcion flecha
+      const suma4 = (a, b) => {
+        return a + b;
+      };
+      console.log(suma4(44, 44));
+
+      // Funcion flecha con una linea
+      const suma5 = (a, b) => a + b;
+      console.log(suma5(55, 55));
+    </script>
+  </body>
+</html>
