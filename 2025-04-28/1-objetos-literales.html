@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Objeto literales</title>
+  </head>
+  <body>
+    <script>
+      const objeto = {
+        // Propiedades
+        texto: "texto",
+        numero: 45,
+        "una propiedad😀": 666.666,
+        contraseña: 123,
+        // Metodos
+        sumar(a, b) {
+          return a + b + this.numero;
+        },
+        restar: function (a, b) {
+          return a - b - this.numero;
+        },
+        multiplicar: (a, b) => {
+          console.log("funcion flecha:", this.numero);
+          return a * b;
+        },
+      };
+
+      // Leer propiedades
+      console.log(objeto.texto);
+      console.log(objeto.numero);
+      console.log(objeto["numero"]);
+      console.log(objeto["una propiedad😀"]);
+      console.log(objeto.contraseña);
+      console.log(objeto);
+
+      // Modificar propiedades
+      objeto.texto = "mensaje";
+      console.log(objeto.texto);
+
+      // Agregar nuevas propiedades
+      objeto.sumatoria = 36;
+      console.log(objeto);
+
+      // Metodos
+      console.log(objeto.sumar(2, 6));
+      console.log(objeto.restar(2, 6));
+      console.log(objeto.multiplicar(2, 6));
+
+      // undefined
+      console.log(objeto.abc);
+      console.log(objeto["abc"]);
+
+      objeto.sumatoria = 3;
+      console.log(objeto);
+      objeto.sumatoria = undefined;
+      console.log(objeto);
+      delete objeto.sumatoria;
+      console.log(objeto);
+    </script>
+  </body>
+</html>
