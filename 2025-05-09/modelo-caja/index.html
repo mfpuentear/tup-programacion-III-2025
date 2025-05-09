@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modelo de Caja CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Entendiendo el Modelo de Caja en CSS</h1>
+    </header>
+
+    <main>
+      <section class="explicacion">
+        <h2>¿Qué es el Modelo de Caja?</h2>
+        <p>
+          En CSS, cada elemento HTML se representa como una caja rectangular. El
+          modelo de caja describe cómo se calcula el tamaño de estos elementos y
+          cómo interactúan entre sí. Consiste en cuatro áreas principales, de
+          adentro hacia afuera:
+        </p>
+        <ul>
+          <li>
+            <strong>Contenido (Content):</strong> El área donde se muestra tu
+            texto, imágenes u otro contenido multimedia. Sus dimensiones son el
+            ancho (width) y alto (height) del contenido.
+          </li>
+          <li>
+            <strong>Relleno (Padding):</strong> Un espacio transparente
+            alrededor del contenido. "Empuja" el contenido hacia adentro,
+            alejándolo del borde.
+          </li>
+          <li>
+            <strong>Borde (Border):</strong> Una línea que rodea el padding y el
+            contenido. Tiene grosor, estilo y color.
+          </li>
+          <li>
+            <strong>Margen (Margin):</strong> Un espacio transparente fuera del
+            borde. "Empuja" a otros elementos, creando espacio entre ellos.
+          </li>
+        </ul>
+      </section>
+
+      <section class="ejemplo-practico">
+        <h2>Ejemplo Práctico</h2>
+        <p>
+          Observa la caja de abajo. Puedes inspeccionar su código CSS en
+          <code>styles.css</code> y experimentar cambiando los valores de
+          <code>padding</code>, <code>border</code>, y <code>margin</code>.
+        </p>
+
+        <div class="caja-ejemplo">
+          <div class="contenido">
+            Este es el contenido de la caja. Intenta cambiar las propiedades en
+            el CSS para ver los efectos.
+          </div>
+        </div>
+
+        <div class="controles">
+          <h3>Controla la Caja (Modifica <code>styles.css</code>)</h3>
+          <p>
+            Abre el archivo <code>styles.css</code> y busca la clase
+            <code>.caja-ejemplo</code>. Prueba:
+          </p>
+          <ul>
+            <li>
+              Cambiar <code>padding</code> de <code>20px</code> a
+              <code>40px</code>.
+            </li>
+            <li>
+              Cambiar <code>border-width</code> de <code>5px</code> a
+              <code>10px</code> y <code>border-style</code> a
+              <code>dotted</code>.
+            </li>
+            <li>
+              Cambiar <code>margin</code> de <code>30px</code> a
+              <code>50px</code>.
+            </li>
+            <li>
+              Observa cómo el tamaño total de la caja y su espaciado con otros
+              elementos cambia.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="box-sizing-info">
+        <h2>Una Nota Importante: <code>box-sizing</code></h2>
+        <p>
+          Por defecto, la propiedad <code>box-sizing</code> tiene el valor
+          <code>content-box</code>. Esto significa que el <code>width</code> y
+          <code>height</code> que defines para un elemento solo aplican al área
+          de contenido. El padding y el borde se añaden *adicionalmente* a ese
+          ancho y alto, haciendo que la caja sea más grande de lo especificado.
+        </p>
+        <p>
+          Para un control más intuitivo del tamaño, muchos desarrolladores
+          prefieren usar <code>box-sizing: border-box;</code>. Con
+          <code>border-box</code>, el <code>width</code> y
+          <code>height</code> que defines incluyen el contenido, el padding y el
+          borde. Esto significa que si defines un ancho de <code>200px</code>,
+          la caja entera (incluyendo padding y borde) medirá
+          <code>200px</code> de ancho, y el área de contenido se encogerá para
+          acomodar el padding y el borde.
+        </p>
+        <pre><code>
+/* Aplicar a todos los elementos para un manejo de tamaño más predecible */
+* {
+  box-sizing: border-box;
+}
+            </code></pre>
+        <div class="caja-border-box">
+          Esta caja usa <code>box-sizing: border-box;</code>. Su ancho total
+          (incluyendo padding y borde) es de 300px.
+        </div>
+      </section>
+
+      <section class="sintaxis-propiedades">
+        <h2>Sintaxis Abreviada de Margin, Padding y Border</h2>
+        <p>
+          CSS ofrece una sintaxis abreviada (shorthand) para definir los valores
+          de <code>margin</code>, <code>padding</code> y algunas propiedades de
+          <code>border</code>, lo que hace tu código más conciso y legible.
+        </p>
+
+        <h3>Padding y Margin</h3>
+        <p>
+          Las propiedades <code>padding</code> (relleno) y
+          <code>margin</code> (margen) comparten la misma lógica para su
+          sintaxis abreviada. El orden de los valores sigue las manecillas del
+          reloj, comenzando desde arriba.
+        </p>
+        <ul>
+          <li>
+            <strong>Un valor:</strong> <code>padding: 20px;</code>
+            <p>
+              Aplica el mismo valor a los <strong>cuatro lados</strong> (arriba,
+              derecha, abajo, izquierda).
+            </p>
+            <div class="ejemplo-sintaxis">
+              <code>padding: 20px;</code><br />/* Es igual a: */<br /><code
+                >padding-top: 20px;<br />padding-right: 20px;<br />padding-bottom:
+                20px;<br />padding-left: 20px;</code
+              >
+            </div>
+          </li>
+          <li>
+            <strong>Dos valores:</strong> <code>padding: 20px 40px;</code>
+            <p>
+              El primer valor se aplica a <strong>arriba y abajo</strong>, el
+              segundo valor a <strong>izquierda y derecha</strong>.
+            </p>
+            <div class="ejemplo-sintaxis">
+              <code>padding: 20px 40px;</code><br />/* Es igual a: */<br /><code
+                >padding-top: 20px;<br />padding-right: 40px;<br />padding-bottom:
+                20px;<br />padding-left: 40px;</code
+              >
+            </div>
+          </li>
+          <li>
+            <strong>Tres valores:</strong> <code>padding: 20px 40px 30px;</code>
+            <p>
+              El primer valor es para <strong>arriba</strong>, el segundo para
+              <strong>izquierda y derecha</strong>, y el tercero para
+              <strong>abajo</strong>.
+            </p>
+            <div class="ejemplo-sintaxis">
+              <code>padding: 20px 40px 30px;</code><br />/* Es igual a: */<br /><code
+                >padding-top: 20px;<br />padding-right: 40px;<br />padding-bottom:
+                30px;<br />padding-left: 40px; /* Se toma del segundo valor
+                */</code
+              >
+            </div>
+          </li>
+          <li>
+            <strong>Cuatro valores:</strong>
+            <code>padding: 20px 40px 30px 10px;</code>
+            <p>
+              Los valores se aplican en el orden de las agujas del reloj:
+              <strong>arriba, derecha, abajo, izquierda</strong>.
+            </p>
+            <div class="ejemplo-sintaxis">
+              <code>padding: 20px 40px 30px 10px;</code><br />/* Es igual a:
+              */<br /><code
+                >padding-top: 20px;<br />padding-right: 40px;<br />padding-bottom:
+                30px;<br />padding-left: 10px;</code
+              >
+            </div>
+          </li>
+        </ul>
+        <p>
+          <em
+            ><strong>Importante:</strong> Esta sintaxis funciona exactamente
+            igual para la propiedad <code>margin</code>. Simplemente reemplaza
+            <code>padding</code> por <code>margin</code> en los ejemplos
+            anteriores.</em
+          >
+        </p>
+
+        <h3>Border</h3>
+        <p>
+          La propiedad <code>border</code> es un poco diferente, pero muy
+          poderosa. La forma más común de abreviatura es para definir el ancho,
+          estilo y color de <strong>todos los bordes a la vez</strong>:
+        </p>
+        <div class="ejemplo-sintaxis">
+          <code>border: 2px solid red;</code><br />Esto establece un borde de 2
+          píxeles de grosor, estilo sólido y color cian (definido en nuestras
+          variables) en los cuatro lados. Es equivalente a:<br /><code
+            >border-width: 2px;<br />border-style: solid;<br />border-color:
+            red;</code
+          >
+        </div>
+        <p>
+          No hay una sintaxis abreviada para <code>border</code> que tome 2, 3 o
+          4 valores para definir *diferentes* anchos, estilos o colores para
+          diferentes lados en una sola declaración `border`. Sin embargo, las
+          propiedades individuales como <code>border-width</code>,
+          <code>border-color</code>, y <code>border-style</code> sí pueden tomar
+          de uno a cuatro valores para afectar lados específicos, siguiendo la
+          misma lógica que margin y padding:
+        </p>
+        <ul>
+          <li>
+            <strong><code>border-width: 2px 4px 6px 8px;</code></strong>
+            (grosor: arriba, derecha, abajo, izquierda)
+          </li>
+          <li>
+            <strong><code>border-color: red green blue yellow;</code></strong>
+            (color: arriba, derecha, abajo, izquierda)
+          </li>
+          <li>
+            <strong
+              ><code>border-style: solid dashed dotted double;</code></strong
+            >
+            (estilo: arriba, derecha, abajo, izquierda)
+          </li>
+        </ul>
+        <p>
+          Y, por supuesto, puedes controlar cada lado individualmente con
+          propiedades como <code>border-top</code>, <code>border-right</code>,
+          <code>border-bottom</code>, y <code>border-left</code>. Estas, a su
+          vez, son "shorthands" para el ancho, estilo y color de ese lado
+          específico:
+        </p>
+        <div class="ejemplo-sintaxis">
+          <code>border-top: 3px dotted blue;</code><br /><code
+            >border-left-color: yellow;</code
+          >
+          /* Solo cambia el color del borde izquierdo */
+        </div>
+        <p>
+          Dominar estas abreviaturas te ayudará a escribir CSS más limpio y
+          eficiente.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Modelo de Caja CSS - Programacióñ III - TUP - UTN La Rioja</p>
+    </footer>
+  </body>
+</html>

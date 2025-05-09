@@ -1,0 +1,207 @@
+/* Estilos generales - TEMA OSCURO */
+:root {
+  --color-fondo-principal: #1a1a2e; /* Azul noche muy oscuro */
+  --color-fondo-secundario: #16213e; /* Azul oscuro ligeramente más claro */
+  --color-fondo-tarjeta: #2c3e50; /* Gris azulado oscuro para las tarjetas/secciones */
+  --color-texto-principal: #e0e0e0; /* Gris muy claro, casi blanco */
+  --color-texto-secundario: #b0bec5; /* Gris azulado claro */
+  --color-acento-primario: #00bcd4; /* Cian brillante */
+  --color-acento-secundario: #7e57c2; /* Púrpura medio */
+  --color-borde: #4a6572; /* Gris azulado para bordes */
+  --color-sombra: rgba(0, 0, 0, 0.3);
+  --color-fondo-code: #263238; /* Gris oscuro para bloques de código */
+  --color-texto-code: #eeffff; /* Texto muy claro para código */
+}
+
+body {
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* Fuentes modernas */
+  line-height: 1.7; /* Ligeramente más espaciado para legibilidad */
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-fondo-principal);
+  color: var(--color-texto-principal);
+}
+
+header {
+  background-color: var(--color-fondo-secundario);
+  color: var(--color-acento-primario);
+  padding: 1.5rem 0; /* Más padding vertical */
+  text-align: center;
+  border-bottom: 2px solid var(--color-acento-primario);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem; /* Tamaño de fuente más grande para el título principal */
+  font-weight: 300; /* Fuente más ligera */
+}
+
+main {
+  padding: 25px;
+  max-width: 950px;
+  margin: 30px auto;
+  background-color: var(--color-fondo-tarjeta);
+  border-radius: 12px; /* Bordes más redondeados */
+  box-shadow: 0 8px 25px var(--color-sombra); /* Sombra más pronunciada */
+}
+
+section {
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+section:last-child {
+  border-bottom: none;
+}
+
+h2 {
+  color: var(--color-acento-primario);
+  margin-top: 0;
+  margin-bottom: 20px; /* Más espacio debajo de los H2 */
+  font-size: 1.8rem;
+  font-weight: 400;
+  border-bottom: 1px solid var(--color-acento-secundario); /* Línea sutil debajo de H2 */
+  padding-bottom: 10px;
+}
+
+code {
+  background-color: var(--color-fondo-code);
+  color: var(--color-texto-code);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: "Fira Code", "Consolas", "Courier New", monospace; /* Fuentes específicas para código */
+  font-size: 0.95em;
+}
+
+pre {
+  background-color: var(--color-fondo-code);
+  color: var(--color-texto-code);
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra interna sutil */
+  border-left: 4px solid var(--color-acento-secundario); /* Borde izquierdo distintivo */
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-left: none; /* Evitar doble borde */
+  box-shadow: none; /* Evitar doble sombra */
+}
+
+/* ---- Modelo de Caja - Ejemplo Práctico ---- */
+.caja-ejemplo {
+  background-color: var(
+    --color-fondo-secundario
+  ); /* Fondo más oscuro para la caja de ejemplo */
+  color: var(--color-texto-principal);
+
+  /* Propiedad Padding */
+  padding: 20px;
+
+  /* Propiedad Border */
+  border-width: 5px; /* Borde ligeramente más grueso */
+  border-style: solid;
+  border-color: var(--color-acento-primario);
+  border-radius: 10px; /* Bordes redondeados para la caja */
+
+  /* Propiedad Margin */
+  margin: 30px auto; /* Centrar y más margen vertical */
+
+  box-sizing: content-box; /* Cambia a border-box para ver la diferencia */
+
+  width: 380px;
+  text-align: center;
+  box-shadow: 0 5px 15px var(--color-sombra); /* Sombra para destacar la caja */
+}
+
+.caja-ejemplo .contenido {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Fondo muy sutil para el contenido, casi transparente */
+  padding: 15px;
+  border: 2px dashed var(--color-borde);
+  border-radius: 6px; /* Bordes redondeados para el contenido interno */
+  min-height: 60px;
+  color: var(
+    --color-texto-secundario
+  ); /* Texto del contenido un poco más tenue */
+}
+
+.controles {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: var(
+    --color-fondo-tarjeta
+  ); /* Consistente con el fondo de la sección */
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.controles h3 {
+  margin-top: 0;
+  color: var(--color-acento-secundario);
+  font-weight: 500;
+}
+
+/* ---- Ejemplo con box-sizing: border-box ---- */
+.box-sizing-info {
+  margin-top: 40px;
+}
+
+.caja-border-box {
+  box-sizing: border-box;
+  width: 340px;
+  padding: 30px;
+  border: 12px solid var(--color-acento-secundario);
+  background-color: var(--color-fondo-secundario);
+  color: var(--color-texto-principal);
+  margin: 25px auto;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px var(--color-sombra);
+}
+
+.sintaxis-propiedades h3 {
+  color: var(--color-acento-secundario); /* Usar un color de acento */
+  margin-top: 30px; /* Más espacio arriba */
+  margin-bottom: 15px;
+  font-size: 1.5rem; /* Ligeramente más pequeño que H2 */
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-borde); /* Separador sutil */
+  padding-bottom: 8px;
+}
+
+.sintaxis-propiedades .ejemplo-sintaxis {
+  background-color: var(--color-fondo-code); /* Reutilizar el fondo de código */
+  color: var(--color-texto-code);
+  padding: 15px 20px; /* Más padding horizontal */
+  margin: 15px 0 25px 0; /* Ajustar márgenes */
+  border-radius: 8px; /* Bordes redondeados consistentes */
+  border-left: 4px solid var(--color-acento-primario); /* Borde izquierdo distintivo */
+  font-family: "Fira Code", "Consolas", "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.7; /* Buena legibilidad para bloques de código */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.sintaxis-propiedades .ejemplo-sintaxis em,
+.sintaxis-propiedades .ejemplo-sintaxis .comentario-css {
+  color: #90a4ae; /* Un gris más suave para comentarios */
+  font-style: italic;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  background-color: var(--color-fondo-secundario);
+  color: var(--color-texto-secundario);
+  margin-top: 40px;
+  border-top: 2px solid var(--color-acento-primario);
+}
