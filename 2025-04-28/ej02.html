@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 2</title>
+  </head>
+  <body>
+    <script>
+      function contarPares(arreglo) {
+        let contador = 0;
+        /*
+        for (let i = 0; i < arreglo.length; i++) {
+          if (arreglo[i] % 2 === 0) {
+            contador++;
+          }
+        }
+        */
+        for (const elemento of arreglo) {
+          if (elemento % 2 === 0) {
+            contador++;
+          }
+        }
+        return contador;
+      }
+
+      console.log(contarPares([1, 2, 3, 4, 6, 8, 9, 45, 47]));
+
+      let cadena = "mundo";
+      console.log(cadena.length);
+      console.log(cadena[3]);
+    </script>
+  </body>
+</html>
