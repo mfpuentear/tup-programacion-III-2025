@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 7</title>
+  </head>
+  <body>
+    <script>
+      const estudiante = {
+        nombre: "Matias",
+        edad: 35,
+        cursos: ["matematica", "lengua", "ingles"],
+      };
+
+      function mostrarInfoEstudiante(estudiante) {
+        return `Nombre: ${estudiante.nombre}, Edad: ${
+          estudiante.edad
+        }, Cursos: ${estudiante.cursos.join(", ")}`;
+      }
+
+      console.log(mostrarInfoEstudiante(estudiante));
+      console.log(estudiante.cursos[1]);
+    </script>
+  </body>
+</html>

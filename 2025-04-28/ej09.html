@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 9</title>
+  </head>
+  <body>
+    <script>
+      function esPalindromo(palabra) {
+        // Limpieza
+        // trim: quita caracteres no visibles (espacios, tabulaciones, nuevas lineas, etc)
+        //       del principio y fin del texto
+        // toLowerCase: Convierte a minusculas el texto
+        // replace: Reemplaza texto (una coincidencia)
+        // replaceAll: Reemplaza todos los textos
+        const palabraLimpia = palabra.trim().toLowerCase().replaceAll(" ", "");
+
+        // Inversion:
+        // split: divide el texto en un arreglo con elementos separados por separador
+        // reverse: invierte el arreglo (no esta disponible para cadenas)
+        // join: Convertimos el arreglo en un texto sin separador
+        const supuestoPalindromo = palabraLimpia.split("").reverse().join("");
+
+        return palabraLimpia === supuestoPalindromo;
+      }
+
+      console.log(esPalindromo("  pal BRA   "));
+      console.log(esPalindromo("neuq uEn   "));
+      console.log(esPalindromo("neuquen"));
+    </script>
+  </body>
+</html>

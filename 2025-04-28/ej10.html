@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 10</title>
+  </head>
+  <body>
+    <script>
+      const calificaciones = [
+        { nombre: "lengua", calificacion: 6 },
+        { nombre: "matematica", calificacion: 9 },
+        { nombre: "fisica", calificacion: 7 },
+        { nombre: "filosofia", calificacion: 4 },
+      ];
+
+      function promedioCalificaciones(calificaciones) {
+        let suma = 0;
+        for (const item of calificaciones) {
+          console.log(item);
+          suma += item.calificacion;
+        }
+        return suma / calificaciones.length;
+      }
+
+      console.log(promedioCalificaciones(calificaciones));
+
+      // for-in
+      const obj = { uno: 1, dos: 2, tres: 3 };
+      for (const item in obj) {
+        console.log(item);
+      }
+
+      // Anidamiento objetos-arreglos
+      const arr = [
+        "a",
+        { uno: 1, dos: ["uno", "dos", { queLoTiro: "auch", este: "llegue" }] },
+        "c",
+        { a: 1, b: "aqui" },
+      ];
+      console.log(arr);
+      console.log(arr[3].b);
+      console.log(arr[1].dos[2].este);
+    </script>
+  </body>
+</html>
