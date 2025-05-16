@@ -2,11 +2,23 @@
 <html>
   <head>
     <title>Modificar elementos de DOM</title>
+    <style type="text/css">
+      .negrita {
+        font-weight: bold;
+      }
+      .verde {
+        color: green;
+      }
+      .fondo {
+        background-color: yellow;
+      }
+    </style>
   </head>
   <body>
     <h1 id="encabezado">Un titulo</h1>
     <p id="texto">Un parrafo</p>
     <a id="link" href="#">Enlace</a>
+    <p id="texto2" class="verde negrita">Otro parrafo</p>
     <script>
       // Modificando el contenido del elemento
       const encabezado = document.getElementById("encabezado");
@@ -22,8 +34,24 @@
       //link.removeAttribute("href");
 
       // Modificar estilos CSS
-      // propiedad style
-      // classlist
+      texto.style.color = "red";
+
+      const texto2 = document.getElementById("texto2");
+      console.log(texto2.classList.length);
+      // Agregar clase
+      texto2.classList.add("fondo");
+
+      // Quitar clase
+      texto2.classList.remove("verde");
+
+      // Ver si existe clase
+      console.log(texto2.classList.contains("fondo"));
+
+      // Invertir clase
+      //  (si no esta la clase la agrega)
+      //  (si esta la clase la quita)
+      texto2.classList.toggle("verde");
+      texto2.classList.toggle("fondo");
     </script>
   </body>
 </html>
