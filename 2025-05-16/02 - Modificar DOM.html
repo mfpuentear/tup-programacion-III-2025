@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Modificar elementos de DOM</title>
+  </head>
+  <body>
+    <h1 id="encabezado">Un titulo</h1>
+    <p id="texto">Un parrafo</p>
+    <a id="link" href="#">Enlace</a>
+    <script>
+      // Modificando el contenido del elemento
+      const encabezado = document.getElementById("encabezado");
+      encabezado.innerText = "Titulo modificado en JS";
+
+      const texto = document.getElementById("texto");
+      texto.innerHTML = "<b>hola</b> mundo";
+
+      // Leer/Modificar atributos del elemento
+      const link = document.getElementById("link");
+      console.log(link.getAttribute("href"));
+      link.setAttribute("href", "https://google.com.ar");
+      //link.removeAttribute("href");
+
+      // Modificar estilos CSS
+      // propiedad style
+      // classlist
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Acceso a elementos de DOM</title>
+  </head>
+  <body>
+    <h1 id="Enc">Un titulo</h1>
+    <p id="texto">Un parrafo</p>
+    <ul>
+      <li>uno</li>
+      <li>dos</li>
+      <li>tres</li>
+    </ul>
+    <ol id="lista">
+      <li class="item">a</li>
+      <li class="item">b</li>
+      <li class="item">c</li>
+      <li class="item" style="display: none">d</li>
+    </ol>
+    <script>
+      // Acceso por ID
+      const encabezado = document.getElementById("Enc");
+      const texto = document.getElementById("texto");
+      console.log(encabezado.textContent);
+      console.log(texto.textContent);
+
+      // Acceso por nombre de etiqueta
+      const lis = document.getElementsByTagName("li");
+      console.log(lis.length);
+      console.log(lis[0].textContent);
+
+      // Acceso por clase
+      const el = document.getElementsByClassName("item");
+      console.log(el.length);
+      console.log(el[0].textContent);
+
+      // Acceso por selector CSS
+      const porElemento = document.querySelector("ul");
+      console.log(porElemento.innerHTML);
+      const porId = document.querySelector("#texto");
+      console.log(porId.textContent);
+      const porClase = document.querySelector(".item");
+      console.log(porClase.textContent);
+
+      // innerHTML vs innerText vs textContent
+      const lista = document.getElementById("lista");
+      console.log(lista.innerHTML);
+      console.log(lista.innerText);
+      console.log(lista.textContent);
+    </script>
+  </body>
+</html>
