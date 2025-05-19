@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 4</title>
+  </head>
+  <body>
+    <h3>Lista de Tareas:</h3>
+    <ul id="tareas">
+      <li>Estudiar JavaScript</li>
+      <li>Hacer la compra</li>
+      <li>Llamar al técnico</li>
+      <li>Leer un capítulo del libro</li>
+    </ul>
+    <ul>
+      <li>a</li>
+      <li>b</li>
+      <li>c</li>
+    </ul>
+    <script>
+      const tareas = document.getElementById("tareas");
+
+      const lis = tareas.getElementsByTagName("li");
+      for (const li of lis) {
+        li.innerText = "[HECHO] " + li.innerText;
+      }
+    </script>
+  </body>
+</html>

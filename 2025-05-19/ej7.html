@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 7</title>
+  </head>
+  <body>
+    <p id="texto">Texto:</p>
+    <input id="valor" />
+    <button id="boton">Modificar texto</button>
+    <script>
+      const texto = document.getElementById("texto");
+      const valor = document.getElementById("valor");
+      const boton = document.getElementById("boton");
+
+      boton.addEventListener("click", () => {
+        texto.innerText = "Texto: " + valor.value;
+        console.log("con Number", Number(valor.value));
+        console.log("con parseInt", parseInt(valor.value));
+        console.log("con parseFloat", parseFloat(valor.value));
+        console.log("con +", +valor.value);
+        console.log(25);
+        console.log(Number(valor.value) + 25);
+
+        // Si escribo numero en value, este se convierte a string
+        valor.value = 56;
+        console.log(valor.value);
+        window.alert("alerta!! un resultado");
+      });
+    </script>
+  </body>
+</html>
