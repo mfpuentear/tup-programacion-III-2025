@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eventos</title>
+  </head>
+  <body>
+    <h1>Titulo</h1>
+    <div id="divisor">
+      <p id="texto">Un texto</p>
+      <button id="saludar">Saludar</button>
+    </div>
+    <script>
+      const divisor = document.getElementById("divisor");
+      divisor.addEventListener("click", () => {
+        console.log("en divisor");
+      });
+
+      // Accedemos al elemento con ID="saludar"
+      const saludar = document.getElementById("saludar");
+
+      // Funcion que atiende el evento 'click'
+      function handleClick() {
+        console.log("hola mundo");
+
+        const texto = document.getElementById("texto");
+        texto.innerText = "Hola mundo";
+      }
+
+      // Conectamos al evento 'click' con addEventListener
+      // Primer parametro: evento.
+      // Segundo parametro: referencia a funcion
+      saludar.addEventListener("click", handleClick);
+
+      // Closures
+      let contador = 0;
+      saludar.addEventListener("mouseover", () => {
+        saludar.style.backgroundColor = "lightGreen";
+        saludar.innerText = "Presioname " + contador;
+        contador++;
+      });
+
+      saludar.addEventListener("mouseout", () => {
+        saludar.style.backgroundColor = "";
+        saludar.innerText = "Saludar";
+      });
+    </script>
+  </body>
+</html>
