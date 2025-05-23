@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 10</title>
+  </head>
+  <body>
+    <select id="color">
+      <option value="red">Rojo</option>
+      <option value="green">Verde</option>
+      <option value="blue">Azul</option>
+    </select>
+    <select id="fondo">
+      <option value="cyan">Cyan</option>
+      <option value="magenta">Magenta</option>
+      <option value="yellow">Amarillo</option>
+    </select>
+    <p id="texto">Un texto</p>
+    <script>
+      const texto = document.getElementById("texto");
+
+      const color = document.getElementById("color");
+      color.addEventListener("change", (e) => {
+        console.log(e.target.value);
+        console.log(color.value);
+        texto.style.color = color.value;
+      });
+
+      const fondo = document.getElementById("fondo");
+      fondo.addEventListener("change", (e) => {
+        texto.style.backgroundColor = fondo.value;
+      });
+    </script>
+  </body>
+</html>

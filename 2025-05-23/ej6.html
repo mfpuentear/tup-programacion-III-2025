@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 6</title>
+  </head>
+  <body>
+    <div id="perfilUsuario"></div>
+    <script>
+      const perfilUsuario = document.getElementById("perfilUsuario");
+
+      const nombre = document.createElement("h2");
+      //nombre.innerHTML = "<b>Matias De la Puente</b>";
+      nombre.innerText = "Matias De la Puente";
+      nombre.style.textDecoration = "underline";
+      //nombre.style.fontWeight = "bold";
+
+      const mail = document.createElement("p");
+      mail.innerHTML = "<i>mail@gmail.com</i>";
+
+      const edad = document.createElement("p");
+      edad.innerText = "25";
+
+      perfilUsuario.appendChild(nombre);
+      perfilUsuario.appendChild(mail);
+      perfilUsuario.appendChild(edad);
+    </script>
+  </body>
+</html>

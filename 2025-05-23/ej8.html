@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ejercicio 8</title>
+    <style>
+      .oculto {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    <button id="toggleBoton">
+      <span id="ocultar" class="oculto">Ocultar</span>
+      <span id="mostrar">Mostrar</span>
+      Secreto
+    </button>
+      -->
+    <button id="toggleBoton">Mostrar Secreto</button>
+    <p id="secreto" class="oculto">¡Este es un mensaje secreto!</p>
+    <script>
+      const toggleBoton = document.getElementById("toggleBoton");
+
+      toggleBoton.addEventListener("click", () => {
+        const secreto = document.getElementById("secreto");
+        //const ocultar = document.getElementById("ocultar");
+        //const mostrar = document.getElementById("mostrar");
+        secreto.classList.toggle("oculto");
+        toggleBoton.innerText = secreto.classList.contains("oculto")
+          ? "Mostrar Secreto"
+          : "Ocultar Secreto";
+        //ocultar.classList.toggle("oculto");
+        //mostrar.classList.toggle("oculto");
+      });
+    </script>
+  </body>
+</html>
