@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formularios</title>
+  </head>
+  <body>
+    <h1>Cargar usuario</h1>
+    <form id="formulario">
+      <fieldset>
+        <legend>Datos generales</legend>
+        <label for="apellido">Apellido</label>
+        <input id="apellido" name="apellido" /><br />
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" /><br />
+        <label for="edad">Edad</label>
+        <input id="edad" type="number" min="1" max="100" />
+      </fieldset>
+      <fieldset>
+        <legend>Idiomas</legend>
+        <label>
+          <input type="checkbox" name="idioma" value="es" />
+          Español
+        </label>
+        <label>
+          <input type="checkbox" name="idioma" value="en" />
+          Ingles
+        </label>
+        <label>
+          <input type="checkbox" name="idioma" value="fr" />
+          Frances
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Altura</legend>
+        <label>
+          <input type="radio" name="altura" value="<1.60" />
+          menor a 1.60
+        </label>
+        <label>
+          <input type="radio" name="altura" value="1.60-1.80" />
+          mayor a 1.60 menor a 1.80
+        </label>
+        <label>
+          <input type="radio" name="altura" value=">1.80" />
+          mayor a 1.80
+        </label>
+      </fieldset>
+      <input type="submit" />
+      <input type="reset" />
+    </form>
+    <script>
+      const formulario = document.getElementById("formulario");
+
+      formulario.addEventListener("submit", (e) => {
+        // Prevenimos que el formulario envie datos al servidor
+        e.preventDefault();
+
+        // Aqui se agregan validaciones en cliente
+        console.log("apellido", formulario.elements.apellido.value);
+        console.log("nombre", formulario.elements.nombre.value);
+        console.log("edad", formulario.elements.edad.value);
+        console.log("español", formulario.elements.idioma[0].checked);
+        console.log("ingles", formulario.elements.idioma[1].checked);
+        console.log("frances", formulario.elements.idioma[2].checked);
+        console.log("idioma", formulario.elements.idioma.value); // ['es', 'en']
+        console.log("altura", formulario.elements.altura.value);
+        console.log("Cargar datos!");
+      });
+      formulario.dispatchEvent();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formularios</title>
+  </head>
+  <body>
+    <h1>Cargar usuario</h1>
+    <form id="formulario">
+      <div>
+        <!-- Vinculo con atributo 'for' -->
+        <label for="apellido">Apellido</label>
+        <input id="apellido" name="apellido" required />
+      </div>
+      <div>
+        <!-- Vinculo dentro de label -->
+        <label>
+          Nombre
+          <input name="nombre" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Edad
+          <input type="number" min="1" max="100" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Contaseña
+          <input
+            type="password"
+            id="password"
+            name="contraseña"
+            minlength="8"
+          />
+        </label>
+      </div>
+      <!-- 
+      <button type="submit">Cargar</button>
+      -->
+      <input type="submit" />
+    </form>
+    <script>
+      const formulario = document.getElementById("formulario");
+
+      formulario.addEventListener("submit", (e) => {
+        // Prevenimos que el formulario envie datos al servidor
+        e.preventDefault();
+
+        // Aqui se agregan validaciones en cliente
+        console.log("apellido", formulario.elements.apellido.value);
+        console.log("nombre", formulario.elements.nombre.value);
+        console.log("edad", formulario.elements[2].value);
+        console.log("Cargar datos!");
+      });
+    </script>
+  </body>
+</html>
