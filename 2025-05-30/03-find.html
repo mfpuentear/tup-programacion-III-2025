@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript find()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>find()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>find()</code> devuelve el
+      <strong>valor del primer elemento</strong> de un array que cumple con la
+      función de prueba proporcionada. Si ningún valor satisface la función de
+      prueba, se devuelve <code>undefined</code>.
+    </p>
+    <p>
+      Es ideal cuando necesitas buscar un elemento específico en un array basado
+      en una condición y solo te interesa el primer elemento que la cumpla.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+const elementoEncontrado = array.find(function(elementoActual, indice, arrayOriginal) {
+  // retorna true si el elemento cumple la condición, false en caso contrario
+});
+    </code></pre>
+    <ul>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array.
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>find()</code> fue llamado.
+      </li>
+      <li>
+        <strong>Importante:</strong> La función callback debe retornar un valor
+        booleano (<code>true</code> o <code>false</code>).
+        <code>find()</code> se detiene y devuelve el
+        <code>elementoActual</code> tan pronto como la callback retorna
+        <code>true</code>.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>
+        Devuelve el <strong>primer elemento</strong> que cumple la condición, no
+        un array de elementos.
+      </li>
+      <li>
+        Si no encuentra ningún elemento que cumpla la condición, devuelve
+        <code>undefined</code>.
+      </li>
+      <li>No modifica el array original.</li>
+      <li>
+        Detiene la iteración tan pronto como encuentra un elemento que satisface
+        la condición, lo que puede ser eficiente en arrays grandes.
+      </li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE find() ---");
+
+      // Ejemplo 1: Encontrar el primer número mayor que 10 en un array.
+      console.log("\nEjemplo 1: Encontrar primer número > 10");
+      const numeros = [5, 12, 8, 130, 44];
+
+      const encontrado = numeros.find(function (numero) {
+        console.log(`  Evaluando: ${numero}`);
+        return numero > 10;
+      });
+
+      console.log("Elemento encontrado:", encontrado);
+
+      // Ejemplo 2: Encontrar un objeto usuario por su ID.
+      console.log("\nEjemplo 2: Encontrar usuario por ID");
+      const usuarios = [
+        { id: 1, nombre: "Ana", edad: 25 },
+        { id: 2, nombre: "Luis", edad: 30 },
+        { id: 3, nombre: "Juan", edad: 22 },
+        { id: 2, nombre: "Luisa", edad: 28 }, // Otro usuario con ID 2 para demostrar que devuelve el primero
+      ];
+
+      const idABuscar = 2;
+      const usuarioEncontrado = usuarios.find(function (usuario) {
+        console.log(`  Verificando ID: ${usuario.id}`);
+        return usuario.id === idABuscar;
+      });
+
+      console.log("Usuario encontrado:", usuarioEncontrado);
+
+      // Ejemplo 3: Encontrar un producto que esté fuera de stock (cantidad 0).
+      console.log("\nEjemplo 3: Encontrar producto fuera de stock");
+      const inventario = [
+        { nombre: "Manzanas", cantidad: 10 },
+        { nombre: "Peras", cantidad: 0 },
+        { nombre: "Naranjas", cantidad: 5 },
+        { nombre: "Bananas", cantidad: 0 },
+      ];
+
+      const productoAgotado = inventario.find((item) => item.cantidad === 0);
+
+      console.log("Primer producto agotado:", productoAgotado);
+
+      // Ejemplo 4: ¿Qué pasa si no se encuentra nada?
+      console.log("\nEjemplo 4: Búsqueda sin resultados");
+      const numerosPrimos = [2, 3, 5, 7, 11];
+      const primerNumeroParMayorA10 = numerosPrimos.find(
+        (num) => num > 10 && num % 2 === 0
+      );
+
+      console.log(
+        "Primer número par mayor a 10 (en primos):",
+        primerNumeroParMayorA10
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript forEach()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>forEach()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>forEach()</code> ejecuta una función proporcionada una vez
+      por cada elemento del array. Es ideal para cuando necesitas realizar una
+      acción con cada elemento, pero
+      <strong>no necesitas crear un nuevo array</strong> a partir del original.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+array.forEach(function(elementoActual, indice, arrayOriginal) {
+  // código a ejecutar para cada elemento
+});
+    </code></pre>
+    <ul>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array.
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>forEach()</code> fue llamado.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>No devuelve un nuevo array (devuelve <code>undefined</code>).</li>
+      <li>
+        Es utilizado para iterar sobre los elementos de un array y ejecutar una
+        función (callback) para cada uno de ellos.
+      </li>
+      <li>
+        Perfecto para efectos secundarios, como imprimir en consola, modificar
+        elementos de un objeto externo, etc.
+      </li>
+      <li>
+        No se puede detener o romper el bucle <code>forEach</code> usando
+        <code>break</code> (a diferencia de un bucle <code>for</code>). Para
+        "salir" de la iteración actual de la función callback, se puede usar
+        <code>return</code>, pero esto solo finaliza la ejecución actual de la
+        callback, no el bucle <code>forEach</code> en sí.
+      </li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE forEach() ---");
+
+      // Ejemplo 1: Imprimir cada elemento de un array.
+      console.log("\nEjemplo 1: Imprimir frutas");
+      const frutas = ["manzana", "banana", "cereza"];
+
+      frutas.forEach((fruta, indice) =>
+        console.log(`Índice ${indice}: ${fruta}`)
+      );
+
+      // Ejemplo 2: Sumar los elementos de un array a una variable externa.
+      console.log("\nEjemplo 2: Sumar números a una variable externa");
+      const numeros = [10, 20, 30];
+      let suma = 0;
+
+      numeros.forEach(function (numero) {
+        suma += numero;
+      });
+      console.log(`La suma total es: ${suma}`);
+
+      // Ejemplo 3: Modificar propiedades de objetos dentro de un array.
+      console.log("\nEjemplo 3: Modificar objetos en un array");
+      const usuarios = [
+        { nombre: "Ana", activo: false },
+        { nombre: "Luis", activo: false },
+        { nombre: "Carlos", activo: false },
+      ];
+
+      usuarios.forEach(function (usuario) {
+        usuario.activo = true; // Modificamos directamente el objeto
+      });
+      console.log(usuarios);
+    </script>
+  </body>
+</html>

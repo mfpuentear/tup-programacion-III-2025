@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript filter()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>filter()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>filter()</code> <strong>crea un nuevo array</strong> con
+      todos los elementos que cumplan la condición implementada por la función
+      dada.
+    </p>
+    <p>
+      Es ideal cuando necesitas seleccionar un subconjunto de elementos de un
+      array que satisfacen ciertos criterios, generando una nueva colección con
+      solo esos elementos.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+const nuevoArrayFiltrado = array.filter(function(elementoActual, indice, arrayOriginal) {
+  // retorna true para incluir el elemento en el nuevo array, false para excluirlo
+});
+    </code></pre>
+    <ul>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array.
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>filter()</code> fue llamado.
+      </li>
+      <li>
+        <strong>Importante:</strong> La función callback debe retornar un valor
+        booleano (<code>true</code> o <code>false</code>). Si retorna
+        <code>true</code>, el <code>elementoActual</code> se incluye en el nuevo
+        array. Si retorna <code>false</code>, se excluye.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>
+        <strong>Siempre devuelve un nuevo array</strong>. Este array puede tener
+        menos elementos que el original, o la misma cantidad si todos cumplen, o
+        estar vacío si ninguno cumple.
+      </li>
+      <li>No modifica el array original.</li>
+      <li>
+        Perfecto para seleccionar elementos basados en condiciones: filtrar
+        números pares, palabras de cierta longitud, objetos con propiedades
+        específicas, etc.
+      </li>
+      <li>
+        Si ningún elemento cumple la condición, devuelve un array vacío
+        <code>[]</code>.
+      </li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE filter() ---");
+
+      // Ejemplo 1: Filtrar solo los números pares de un array.
+      console.log("\nEjemplo 1: Filtrar números pares");
+      const listaNumeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+      const numerosPares = listaNumeros.filter(function (numero) {
+        const esPar = numero % 2 === 0;
+        console.log(`  Evaluando ${numero}, ¿es par?: ${esPar}`);
+        return esPar;
+      });
+
+      console.log("Array original:", listaNumeros);
+      console.log("Números pares:", numerosPares);
+
+      // Ejemplo 2: Filtrar palabras con más de 5 letras.
+      console.log("\nEjemplo 2: Filtrar palabras largas");
+      const frases = ["hola", "javascript", "es", "genial", "filter", "ya"];
+
+      const palabrasLargas = frases.filter(function (palabra) {
+        return palabra.length > 5;
+      });
+      console.log("Frases originales:", frases);
+      console.log("Palabras largas (>5 letras):", palabrasLargas);
+
+      // Ejemplo 3: Filtrar usuarios activos de un array de objetos.
+      console.log("\nEjemplo 3: Filtrar usuarios activos");
+      const listaUsuarios = [
+        { nombre: "Eva", activo: true, plan: "premium" },
+        { nombre: "Adan", activo: false, plan: "free" },
+        { nombre: "Leo", activo: true, plan: "free" },
+        { nombre: "Mia", activo: true, plan: "premium" },
+      ];
+
+      const usuariosActivos = listaUsuarios.filter((usuario) => usuario.activo);
+
+      console.log("Todos los usuarios:", listaUsuarios);
+      console.log("Usuarios activos:", usuariosActivos);
+
+      // Ejemplo 4: ¿Qué pasa si ningún elemento cumple la condición?
+      console.log("\nEjemplo 4: Filtro sin resultados");
+      const precios = [150, 200, 350];
+      const preciosBajos = precios.filter((precio) => precio < 100);
+
+      console.log("Precios originales:", precios);
+      console.log("Precios bajos (<100):", preciosBajos);
+    </script>
+  </body>
+</html>

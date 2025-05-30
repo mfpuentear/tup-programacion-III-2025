@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript every()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>every()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>every()</code> comprueba si
+      <strong>todos los elementos</strong> de un array cumplen con la condición
+      implementada por la función proporcionada. Devuelve <code>true</code> si
+      la función de callback retorna <code>true</code> para todos los elementos
+      del array; de lo contrario (si al menos uno no cumple), devuelve
+      <code>false</code>.
+    </p>
+    <p>
+      Es útil cuando necesitas asegurar que cada uno de los elementos de una
+      colección satisface un criterio específico.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+const todosLosElementosCUMPLEN = array.every(function(elementoActual, indice, arrayOriginal) {
+  // retorna true si el elemento cumple la condición, false en caso contrario
+});
+    </code></pre>
+    <ul>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array.
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>every()</code> fue llamado.
+      </li>
+      <li>
+        <strong>Importante:</strong> La función callback debe retornar un valor
+        booleano (<code>true</code> o <code>false</code>).
+        <code>every()</code> se detiene y devuelve <code>false</code> tan pronto
+        como la callback retorna <code>false</code> para cualquier elemento. Si
+        itera sobre todos los elementos y todos hacen que la callback retorne
+        <code>true</code>, entonces <code>every()</code> devuelve
+        <code>true</code>.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>
+        Devuelve un valor booleano: <code>true</code> si todos los elementos
+        cumplen la condición, <code>false</code> si al menos uno no la cumple.
+      </li>
+      <li>No modifica el array original.</li>
+      <li>
+        Detiene la iteración tan pronto como encuentra un elemento que NO
+        satisface la condición (es decir, cuando la callback retorna
+        <code>false</code>), lo que puede ser eficiente.
+      </li>
+      <li>
+        Si el array está vacío, siempre devuelve <code>true</code> (esto se
+        conoce como "verdad vacua": la condición de que "todos los elementos
+        cumplen" es trivialmente cierta porque no hay elementos que puedan
+        incumplirla).
+      </li>
+      <li>Es como preguntar "¿Todos y cada uno cumplen con...?"</li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE every() ---");
+
+      // Ejemplo 1: Comprobar si todos los números en un array son positivos.
+      console.log("\nEjemplo 1: ¿Todos los números son positivos?");
+      const todosPositivos = [1, 2, 3, 10, 100];
+      const algunosNegativos = [1, 2, -3, 4, 5];
+
+      const sonTodosPositivos = todosPositivos.every(function (numero) {
+        console.log(`  Evaluando (todos positivos): ${numero}`);
+        return numero > 0;
+      });
+      console.log("¿Todos en [1,2,3,10,100] son positivos?", sonTodosPositivos);
+
+      const noSonTodosPositivos = algunosNegativos.every(function (numero) {
+        console.log(`  Evaluando (algunos negativos): ${numero}`);
+        return numero > 0;
+      });
+      console.log("¿Todos en [1,2,-3,4,5] son positivos?", noSonTodosPositivos);
+
+      // Ejemplo 2: Verificar si todos los usuarios tienen más de 18 años.
+      console.log(
+        "\nEjemplo 2: ¿Todos los usuarios son mayores de edad (>18)?"
+      );
+      const grupo1 = [
+        { nombre: "Carlos", edad: 25 },
+        { nombre: "Ana", edad: 22 },
+        { nombre: "Luis", edad: 30 },
+      ];
+      const grupo2 = [
+        { nombre: "Eva", edad: 20 },
+        { nombre: "Leo", edad: 17 }, // No cumple
+        { nombre: "Sara", edad: 24 },
+      ];
+
+      const todosMayores = grupo1.every((usuario) => {
+        console.log(`  Verificando edad de ${usuario.nombre}: ${usuario.edad}`);
+        return usuario.edad > 18;
+      });
+      console.log("¿Todos en grupo1 son mayores de 18?", todosMayores);
+
+      const noTodosMayores = grupo2.every((usuario) => {
+        console.log(`  Verificando edad de ${usuario.nombre}: ${usuario.edad}`);
+        return usuario.edad > 18;
+      });
+      console.log("¿Todos en grupo2 son mayores de 18?", noTodosMayores);
+
+      // Ejemplo 3: Comprobar si todas las tareas están completadas.
+      console.log("\nEjemplo 3: ¿Todas las tareas están completadas?");
+      const tareasCompletas = [
+        { descripcion: "Comprar leche", completada: true },
+        { descripcion: "Pagar factura", completada: true },
+        { descripcion: "Leer libro", completada: true },
+      ];
+      const tareasPendientes = [
+        { descripcion: "Estudiar JS", completada: true },
+        { descripcion: "Hacer ejercicio", completada: false },
+        { descripcion: "Llamar a mamá", completada: true },
+      ];
+
+      const todasCompletadas = tareasCompletas.every(
+        (tarea) => tarea.completada
+      );
+      console.log(
+        "¿Todas las tareas en 'tareasCompletas' están completadas?",
+        todasCompletadas
+      );
+
+      const algunaPendiente = tareasPendientes.every((tarea) => {
+        console.log(
+          `  Verificando tarea "${tarea.descripcion}": ${tarea.completada}`
+        );
+        return tarea.completada;
+      });
+      console.log(
+        "¿Todas las tareas en 'tareasPendientes' están completadas?",
+        algunaPendiente
+      );
+
+      // Ejemplo 4: Array vacío
+      console.log("\nEjemplo 4: Array vacío con every()");
+      const otroArrayVacio = [];
+      const resultadoVacioEvery = otroArrayVacio.every((el) => el === false);
+      console.log("Resultado de every() con array vacío:", resultadoVacioEvery);
+    </script>
+  </body>
+</html>

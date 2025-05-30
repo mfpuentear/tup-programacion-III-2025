@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript map()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>map()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>map()</code> <strong>crea un nuevo array</strong> con los
+      resultados de llamar a una función proporcionada en cada elemento del
+      array original. Es perfecto cuando necesitas transformar cada elemento de
+      un array en algo más, generando una nueva colección de datos.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+const nuevoArray = array.map(function(elementoActual, indice, arrayOriginal) {
+  // retorna el nuevo elemento transformado
+});
+    </code></pre>
+    <ul>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array.
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>map()</code> fue llamado.
+      </li>
+      <li>
+        <strong>Importante:</strong> La función callback
+        <strong>debe retornar</strong> el nuevo valor para el elemento en el
+        <code>nuevoArray</code>. Si no se retorna un valor explícitamente (o se
+        retorna <code>undefined</code>), el nuevo array contendrá
+        <code>undefined</code> en esa posición.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>
+        <strong>Siempre devuelve un nuevo array</strong> con la misma cantidad
+        de elementos que el original.
+      </li>
+      <li>No modifica el array original.</li>
+      <li>
+        Ideal para transformar datos: convertir tipos, extraer propiedades,
+        aplicar cálculos a cada elemento.
+      </li>
+      <li>
+        Cada elemento del nuevo array es el resultado de lo que la función
+        callback retorna.
+      </li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE map() ---");
+
+      // Ejemplo 1: Duplicar cada número en un array.
+      console.log("\nEjemplo 1: Duplicar números");
+      const numeros = [1, 2, 3, 4, 5];
+
+      const duplicados = numeros.map(function (numero) {
+        return numero * 2;
+      });
+
+      console.log("Array original:", numeros);
+      console.log("Array duplicado:", duplicados);
+      // Ejemplo 2: Convertir un array de strings a un array de longitudes de esos strings.
+      console.log("\nEjemplo 2: Longitudes de palabras");
+      const palabras = ["hola", "mundo", "javascript", "map"];
+
+      const longitudes = palabras.map(function (palabra) {
+        return palabra.length;
+      });
+      console.log("Palabras:", palabras);
+      console.log("Longitudes:", longitudes);
+
+      // Ejemplo 3: Crear un array de objetos a partir de un array de números, formateando cada uno.
+      console.log("\nEjemplo 3: Crear array de objetos");
+      const idsProductos = [101, 102, 103];
+
+      const productos = idsProductos.map(function (id, indice) {
+        return {
+          id: id,
+          nombre: `Producto ${indice + 1}`,
+          precio: (id - 100) * 10,
+        };
+      });
+
+      console.log("IDs:", idsProductos);
+      console.log("Productos:", productos);
+    </script>
+  </body>
+</html>

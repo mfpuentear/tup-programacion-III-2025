@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript some()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>some()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>some()</code> comprueba si
+      <strong>al menos un elemento</strong> de un array cumple con la condición
+      implementada por la función proporcionada. Devuelve <code>true</code> si
+      la función de callback retorna <code>true</code> para al menos un elemento
+      del array; de lo contrario, devuelve <code>false</code>.
+    </p>
+    <p>
+      Es útil cuando solo necesitas saber si existe algún elemento que satisfaga
+      un criterio específico, sin necesidad de encontrarlo o de verificar todos
+      los elementos si uno ya cumple.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+const algunElementoCUMPLE = array.some(function(elementoActual, indice, arrayOriginal) {
+  // retorna true si el elemento cumple la condición, false en caso contrario
+});
+    </code></pre>
+    <ul>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array.
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>some()</code> fue llamado.
+      </li>
+      <li>
+        <strong>Importante:</strong> La función callback debe retornar un valor
+        booleano (<code>true</code> o <code>false</code>).
+        <code>some()</code> se detiene y devuelve <code>true</code> tan pronto
+        como la callback retorna <code>true</code> para cualquier elemento. Si
+        itera sobre todos los elementos y ninguno hace que la callback retorne
+        <code>true</code>, entonces <code>some()</code> devuelve
+        <code>false</code>.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>
+        Devuelve un valor booleano: <code>true</code> si al menos un elemento
+        cumple la condición, <code>false</code> si ninguno la cumple.
+      </li>
+      <li>No modifica el array original.</li>
+      <li>
+        Detiene la iteración tan pronto como encuentra un elemento que satisface
+        la condición (es decir, cuando la callback retorna <code>true</code>),
+        lo que puede ser eficiente.
+      </li>
+      <li>
+        Si el array está vacío, siempre devuelve <code>false</code>, sin
+        importar la condición.
+      </li>
+      <li>Es como preguntar "¿Existe al menos uno que...?"</li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE some() ---");
+
+      // Ejemplo 1: Comprobar si hay algún número par en un array.
+      console.log("\nEjemplo 1: ¿Hay algún número par?");
+      const numerosLista = [1, 3, 5, 7, 8, 9];
+      const numerosImpares = [1, 3, 5, 7, 9];
+
+      const hayAlgunPar = numerosLista.some(function (numero) {
+        console.log(`  Evaluando (lista con pares): ${numero}`);
+        return numero % 2 === 0;
+      });
+      console.log("¿Algún par en [1,3,5,7,8,9]?", hayAlgunPar);
+
+      const noHayNingunPar = numerosImpares.some(function (numero) {
+        console.log(`  Evaluando (lista solo impares): ${numero}`);
+        return numero % 2 === 0;
+      });
+      console.log("¿Algún par en [1,3,5,7,9]?", noHayNingunPar);
+
+      // Ejemplo 2: Verificar si algún producto tiene un precio menor a 50.
+      console.log("\nEjemplo 2: ¿Algún producto es barato (< 50)?");
+      const productosTienda = [
+        { nombre: "Libro", precio: 120 },
+        { nombre: "Lápiz", precio: 45 },
+        { nombre: "Cuaderno", precio: 90 },
+      ];
+
+      const algunProductoBarato = productosTienda.some(function (producto) {
+        console.log(
+          `  Verificando precio de ${producto.nombre}: ${producto.precio}`
+        );
+        return producto.precio < 50;
+      });
+      console.log("¿Hay algún producto con precio < 50?", algunProductoBarato);
+
+      // Ejemplo 3: Comprobar si alguna palabra en un array es un palíndromo.
+      console.log("\nEjemplo 3: ¿Hay alguna palabra palíndromo?");
+      const palabrasVarias = ["oso", "casa", "ana", "coche"];
+      const noPalindromos = ["sol", "luna", "estrella"];
+
+      function esPalindromo(palabra) {
+        const palabraInvertida = palabra.split("").reverse().join("");
+        return palabra === palabraInvertida;
+      }
+
+      const hayPalindromo = palabrasVarias.some((palabra) => {
+        console.log(`  Evaluando si "${palabra}" es palíndromo.`);
+        return esPalindromo(palabra);
+      });
+      console.log(
+        "¿Alguna palabra es palíndromo en ['oso', 'casa', 'ana', 'coche']?",
+        hayPalindromo
+      );
+
+      const noHayPalindromos = noPalindromos.some((palabra) => {
+        console.log(`  Evaluando si "${palabra}" es palíndromo.`);
+        return esPalindromo(palabra);
+      });
+      console.log(
+        "¿Alguna palabra es palíndromo en ['sol', 'luna', 'estrella']?",
+        noHayPalindromos
+      );
+
+      // Ejemplo 4: Array vacío
+      console.log("\nEjemplo 4: Array vacío");
+      const arrayVacio = [];
+      const resultadoVacio = arrayVacio.some((el) => el > 10);
+      console.log("Resultado con array vacío:", resultadoVacio);
+    </script>
+  </body>
+</html>

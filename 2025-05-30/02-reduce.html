@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Apunte: JavaScript reduce()</title>
+  </head>
+  <body>
+    <h1>Método de Array: <code>reduce()</code></h1>
+
+    <h2>Definición</h2>
+    <p>
+      El método <code>reduce()</code> ejecuta una función "reductora" sobre cada
+      elemento de un array, de izquierda a derecha, para
+      <strong>reducirlo a un único valor de salida</strong>. Es increíblemente
+      versátil y puede usarse para muchas cosas, desde sumar números o
+      concatenar strings, hasta agrupar objetos o transformar un array en un
+      objeto.
+    </p>
+
+    <h2>Declaración (Sintaxis)</h2>
+    <pre><code>
+const valorReducido = array.reduce(function(acumulador, elementoActual, indice, arrayOriginal) {
+  // retorna el nuevo valor del acumulador
+}, valorInicial);
+    </code></pre>
+    <ul>
+      <li>
+        <code>acumulador</code>: El valor retornado por la última invocación de
+        la función callback, o el <code>valorInicial</code> si se proveyó.
+        Esencialmente, "acumula" el resultado.
+      </li>
+      <li>
+        <code>elementoActual</code>: El elemento del array que se está
+        procesando actualmente.
+      </li>
+      <li>
+        <code>indice</code> (opcional): El índice del
+        <code>elementoActual</code> en el array. (Si no se provee
+        <code>valorInicial</code>, la primera vez el
+        <code>elementoActual</code> es el segundo elemento del array y el
+        <code>indice</code> es 1).
+      </li>
+      <li>
+        <code>arrayOriginal</code> (opcional): El array sobre el cual
+        <code>reduce()</code> fue llamado.
+      </li>
+      <li>
+        <code>valorInicial</code> (opcional): Un valor para usar como el primer
+        argumento (<code>acumulador</code>) para la primera llamada de la
+        función <code>callback</code>. Si no se proporciona, el primer elemento
+        del array se usa como el valor inicial del acumulador y la iteración
+        comienza desde el segundo elemento.
+      </li>
+    </ul>
+
+    <h2>Usos y Puntos Clave</h2>
+    <ul>
+      <li>
+        El objetivo principal es "reducir" el array a un solo valor (número,
+        string, objeto, otro array, etc.).
+      </li>
+      <li>
+        El valor devuelto por la función callback se pasa como el
+        <code>acumulador</code> en la siguiente iteración.
+      </li>
+      <li>
+        Si no se provee <code>valorInicial</code> y el array está vacío, se
+        lanzará un <code>TypeError</code>. Si el array tiene un solo elemento y
+        no se provee <code>valorInicial</code>, ese único elemento será
+        retornado sin llamar a la función callback. Es buena práctica proveer un
+        <code>valorInicial</code> adecuado.
+      </li>
+      <li>
+        Puede usarse para implementar la funcionalidad de <code>map</code> o
+        <code>filter</code> (aunque estos son más directos para sus respectivos
+        propósitos).
+      </li>
+    </ul>
+
+    <script>
+      console.log("--- EJEMPLOS DE reduce() ---");
+
+      // Ejemplo 1: Sumar todos los números de un array.
+      console.log("\nEjemplo 1: Sumar todos los números");
+      const numerosParaSumar = [1, 2, 3, 4, 5];
+
+      const sumaTotal = numerosParaSumar.reduce(function (
+        acumulador,
+        numeroActual
+      ) {
+        console.log(
+          `  Acumulador: ${acumulador}, Número Actual: ${numeroActual}, Retorna: ${
+            acumulador + numeroActual
+          }`
+        );
+        return acumulador + numeroActual;
+      },
+      0); // 0 es el valor inicial del acumulador
+
+      console.log("Suma total:", sumaTotal); // Salida esperada: Suma total: 15
+
+      // Ejemplo 2: Encontrar el producto de todos los números en un array.
+      console.log("\nEjemplo 2: Producto de todos los números");
+      const factores = [2, 3, 4];
+      const productoTotal = factores.reduce(function (acumulador, valorActual) {
+        console.log(
+          `  Acumulador: ${acumulador}, Valor Actual: ${valorActual}, Retorna: ${
+            acumulador * valorActual
+          }`
+        );
+        return acumulador * valorActual;
+      }, 1); // Valor inicial es 1 para la multiplicación
+      console.log("Producto total:", productoTotal);
+
+      // Ejemplo 3: "Aplanar" un array de arrays (convertir un array 2D en 1D).
+      console.log("\nEjemplo 3: Aplanar un array");
+      const arrayDeArrays = [
+        [1, 2],
+        [3, 4],
+        [5, 6],
+      ];
+
+      const arrayAplanado = arrayDeArrays.reduce(function (
+        acumulador,
+        arrayActual
+      ) {
+        console.log(
+          `  Acumulador: [${acumulador}], Array Actual: [${arrayActual}], Retorna: [${acumulador.concat(
+            arrayActual
+          )}]`
+        );
+        return acumulador.concat(arrayActual);
+      },
+      []); // [] es un array vacío como valor inicial
+
+      console.log("Array aplanado:", arrayAplanado);
+
+      // Ejemplo 4: Contar la frecuencia de las frutas en un array (resultado en un objeto).
+      console.log("\nEjemplo 4: Contar frecuencia de frutas");
+      const canastaFrutas = [
+        "manzana",
+        "banana",
+        "pera",
+        "manzana",
+        "banana",
+        "manzana",
+        "naranja",
+      ];
+
+      const conteoFrutas = canastaFrutas.reduce(function (acumulador, fruta) {
+        console.log(
+          `  Acumulador: ${JSON.stringify(acumulador)}, Fruta: ${fruta}`
+        );
+        acumulador[fruta] = (acumulador[fruta] || 0) + 1;
+        console.log(`  Retorna: ${JSON.stringify(acumulador)}`);
+        return acumulador;
+      }, {}); // {} es un objeto vacío como valor inicial
+
+      console.log("Conteo de frutas:", conteoFrutas);
+    </script>
+  </body>
+</html>
