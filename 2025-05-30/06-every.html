@@ -107,10 +107,7 @@ const todosLosElementosCUMPLEN = array.every(function(elementoActual, indice, ar
         { nombre: "Sara", edad: 24 },
       ];
 
-      const todosMayores = grupo1.every((usuario) => {
-        console.log(`  Verificando edad de ${usuario.nombre}: ${usuario.edad}`);
-        return usuario.edad > 18;
-      });
+      const todosMayores = grupo1.every((usuario) => usuario.edad > 18);
       console.log("¿Todos en grupo1 son mayores de 18?", todosMayores);
 
       const noTodosMayores = grupo2.every((usuario) => {
