@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>API Ejemplo: Crear Post (POST)</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      #post-form div {
+        margin-bottom: 10px;
+      }
+      label {
+        display: inline-block;
+        width: 100px;
+      }
+      input[type="text"],
+      textarea {
+        width: 300px;
+        padding: 5px;
+      }
+      textarea {
+        height: 80px;
+      }
+      #post-response {
+        border: 1px solid #4caf50;
+        padding: 15px;
+        margin-top: 15px;
+        background-color: #e8f5e9;
+        border-radius: 5px;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+      #sending-post {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplo 3: Enviar (POST) un Nuevo Post a JSONPlaceholder</h1>
+    <p>
+      Este ejemplo simula el envío de un nuevo post. Completa los campos y
+      presiona "Enviar Post".
+    </p>
+
+    <div id="post-form">
+      <div>
+        <label for="post-title">Título:</label>
+        <input type="text" id="post-title" value="Mi Título de Prueba" />
+      </div>
+      <div>
+        <label for="post-body">Contenido:</label>
+        <textarea id="post-body">
+Este es el contenido de mi post de prueba.</textarea
+        >
+      </div>
+      <div>
+        <label for="post-userId">User ID:</label>
+        <input type="number" id="post-userId" value="1" />
+      </div>
+      <button id="send-post-btn">Enviar Post</button>
+    </div>
+    <div id="sending-post" style="display: none">Enviando post...</div>
+
+    <div id="post-response"></div>
+    <div id="error-message-post" class="error"></div>
+
+    <script>
+      const postsEndpoint = "https://jsonplaceholder.typicode.com/posts";
+      const postResponseDiv = document.getElementById("post-response");
+      const errorMessagePostDiv = document.getElementById("error-message-post");
+      const sendPostBtn = document.getElementById("send-post-btn");
+      const sendingPostDiv = document.getElementById("sending-post");
+
+      const postTitleInput = document.getElementById("post-title");
+      const postBodyInput = document.getElementById("post-body");
+      const postUserIdInput = document.getElementById("post-userId");
+
+      sendPostBtn.addEventListener("click", async () => {
+        postResponseDiv.innerHTML = ""; // Limpiar
+        errorMessagePostDiv.textContent = ""; // Limpiar
+        sendingPostDiv.style.display = "block";
+
+        // Preparamos objeto a enviar a la api
+        const nuevoPost = {
+          title: postTitleInput.value,
+          body: postBodyInput.value,
+          userId: parseInt(postUserIdInput.value) || 1,
+        };
+
+        // Verificamos datos
+        if (!nuevoPost.title || !nuevoPost.body) {
+          errorMessagePostDiv.textContent =
+            "El título y el contenido no pueden estar vacíos.";
+          sendingPostDiv.style.display = "none";
+          return;
+        }
+
+        // Enviamos a la api nuevo post
+        const response = await fetch(postsEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=UTF-8" },
+          body: JSON.stringify(nuevoPost),
+        });
+
+        sendingPostDiv.style.display = "none";
+
+        if (!response.ok || response.status !== 201) {
+          // JSONPlaceholder devuelve 201 para POST exitoso
+          errorMessagePostDiv.textContent = `Error al enviar el post: ${response.status}`;
+          return;
+        }
+        const dataCreada = await response.json();
+
+        postResponseDiv.innerHTML = `
+          <h3>Post Creado Exitosamente (simulado por la API):</h3>
+          <p><strong>ID Asignado:</strong> ${dataCreada.id}</p>
+          <p><strong>Título:</strong> ${dataCreada.title}</p>
+          <p><strong>Contenido:</strong> ${dataCreada.body}</p>
+          <p><strong>User ID:</strong> ${dataCreada.userId}</p>`;
+      });
+    </script>
+  </body>
+</html>

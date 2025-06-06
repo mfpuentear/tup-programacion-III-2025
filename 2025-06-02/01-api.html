@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>API Ejemplo: Lista de Tareas (GET)</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      .todo-item {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .todo-item.completed {
+        background-color: #e6ffe6;
+        border-left: 5px solid green;
+      }
+      .todo-item.pending {
+        background-color: #fff0f0;
+        border-left: 5px solid red;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+      #loading {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplo 1: Lista de Tareas (GET de JSONPlaceholder)</h1>
+    <p>
+      Este ejemplo obtiene una lista de 5 tareas pendientes de la API pública
+      JSONPlaceholder y las muestra a continuación.
+    </p>
+    <button id="fetch-todos-btn">Cargar Tareas</button>
+    <div id="loading" style="display: none">Cargando tareas...</div>
+    <div id="todos-list"></div>
+    <div id="error-message" class="error"></div>
+
+    <script>
+      const todosEndpoint =
+        "https://jsonplaceholder.typicode.com/todos?_limit=5";
+      const todosListDiv = document.getElementById("todos-list");
+      const errorMessageDiv = document.getElementById("error-message");
+      const loadingDiv = document.getElementById("loading");
+      const fetchTodosBtn = document.getElementById("fetch-todos-btn");
+
+      fetchTodosBtn.addEventListener("click", async () => {
+        todosListDiv.innerHTML = ""; // Limpiar resultados anteriores
+        errorMessageDiv.textContent = ""; // Limpiar errores anteriores
+        loadingDiv.style.display = "block"; // Mostrar mensaje de cargando
+
+        // Realizar peticion por defecto un pedido por metodo GET
+        const response = await fetch(todosEndpoint);
+
+        loadingDiv.style.display = "none"; // Ocultar mensaje de cargando
+
+        // ¿Hubo error en la peticion?
+        if (!response.ok) {
+          errorMessageDiv.textContent = `Hubo un problema: ${response.status} - ${response.statusText}`;
+          return;
+        }
+
+        // En data guardo el cuerpo de la respuesta
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+          data.forEach((todo) => {
+            const todoElement = document.createElement("div");
+            todoElement.classList.add("todo-item");
+            todoElement.classList.add(todo.completed ? "completed" : "pending");
+            todoElement.innerHTML = `
+              <p><strong>ID:</strong> ${todo.id}</p>
+              <p><strong>Título:</strong> ${todo.title}</p>
+              <p><strong>Completado:</strong> ${
+                todo.completed ? "Sí" : "No"
+              }</p>`;
+            todosListDiv.appendChild(todoElement);
+          });
+        } else {
+          todosListDiv.innerHTML = "<p>No se encontraron tareas.</p>";
+        }
+      });
+    </script>
+  </body>
+</html>

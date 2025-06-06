@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>API Ejemplo: Datos de Pokémon (GET)</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      #pokemon-info {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-top: 15px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      #pokemon-info img {
+        display: block;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+      #loading-pokemon {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplo 2: Obtener Datos de un Pokémon (GET de PokeAPI)</h1>
+    <p>Ingresa el nombre o ID de un Pokémon y presiona "Buscar".</p>
+    <input type="text" id="pokemon-name-input" value="pikachu" />
+    <button id="fetch-pokemon-btn">Buscar Pokémon</button>
+    <div id="loading-pokemon" style="display: none">Buscando Pokémon...</div>
+    <div id="pokemon-info"></div>
+    <div id="error-message-pokemon" class="error"></div>
+
+    <script>
+      const pokemonInfoDiv = document.getElementById("pokemon-info");
+      const errorMessagePokemonDiv = document.getElementById(
+        "error-message-pokemon"
+      );
+      const pokemonNameInput = document.getElementById("pokemon-name-input");
+      const fetchPokemonBtn = document.getElementById("fetch-pokemon-btn");
+      const loadingPokemonDiv = document.getElementById("loading-pokemon");
+
+      fetchPokemonBtn.addEventListener("click", async () => {
+        const pokemonNameOrId = pokemonNameInput.value.trim().toLowerCase();
+        if (!pokemonNameOrId) {
+          errorMessagePokemonDiv.textContent =
+            "Por favor, ingresa un nombre o ID de Pokémon.";
+          return;
+        }
+
+        pokemonInfoDiv.innerHTML = ""; // Limpiar
+        errorMessagePokemonDiv.textContent = ""; // Limpiar
+        loadingPokemonDiv.style.display = "block";
+
+        const pokeApiEndpoint = `https://pokeapi.co/api/v2/pokemon/${pokemonNameOrId}`;
+
+        const response = await fetch(pokeApiEndpoint);
+
+        loadingPokemonDiv.style.display = "none";
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            errorMessagePokemonDiv.textContent = `Error: Pokémon '${pokemonNameOrId}' no encontrado.`;
+          } else {
+            errorMessagePokemonDiv.textContent = `Error: ${response.status}`;
+          }
+          return;
+        }
+
+        const pokemonData = await response.json();
+
+        pokemonInfoDiv.innerHTML = `
+          <h2>${pokemonData.name}</h2>
+          <img src="${pokemonData.sprites.front_shiny}" alt="Sprite de ${
+          pokemonData.name
+        }">
+          <img src="${pokemonData.sprites.front_default}" alt="Sprite de ${
+          pokemonData.name
+        }">
+          <p><strong>ID:</strong> ${pokemonData.id}</p>
+          <p><strong>Altura:</strong> ${pokemonData.height / 10} m</p>
+          <p><strong>Peso:</strong> ${pokemonData.weight / 10} kg</p>
+          <p><strong>Tipos:</strong> ${pokemonData.types
+            .map((typeInfo) => typeInfo.type.name)
+            .join(", ")}</p>`;
+      });
+    </script>
+  </body>
+</html>
