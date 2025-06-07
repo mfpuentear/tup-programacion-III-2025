@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 1</title>
+    <style>
+      .error {
+        color: red;
+      }
+      .registro-exitoso {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejercicio 1</h1>
+    <form id="formulario">
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" name="nombre" />
+        <div id="error-nombre" class="error"></div>
+      </div>
+      <br />
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" name="email" />
+        <div id="error-email" class="error"></div>
+      </div>
+      <br />
+      <div>
+        <label for="contraseña">Contraseña:</label>
+        <input id="contraseña" name="contraseña" type="password" />
+        <div id="error-contraseña" class="error"></div>
+      </div>
+      <br />
+      <input type="submit" />
+    </form>
+    <div id="registro-exitoso" class="registro-exitoso"></div>
+    <script>
+      const formulario = document.getElementById("formulario");
+      const errorNombre = document.getElementById("error-nombre");
+      const errorEmail = document.getElementById("error-email");
+      const errorContraseña = document.getElementById("error-contraseña");
+      const registroExitoso = document.getElementById("registro-exitoso");
+
+      formulario.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Limpiar mensajes
+        errorNombre.innerText = "";
+        errorEmail.innerText = "";
+        errorContraseña.innerText = "";
+        registroExitoso.innerHTML = "";
+
+        let esValido = true;
+
+        // Validar nombre
+        const nombre = formulario.elements.nombre.value;
+        if (!nombre) {
+          esValido = false;
+          errorNombre.innerText = "Nombre esta vacío";
+        }
+
+        // Validar email
+        const email = formulario.elements.email.value;
+        if (!email) {
+          esValido = false;
+          errorEmail.innerText = "Email esta vacío";
+        } else if (!email.includes("@") || !email.includes(".")) {
+          esValido = false;
+          errorEmail.innerText = "Email no es válido";
+        }
+
+        // Validar contraseña
+        const contraseña = formulario.elements.contraseña.value;
+        if (!contraseña) {
+          esValido = false;
+          errorContraseña.innerText = "Contraseña esta vacío";
+        } else if (contraseña.length < 8) {
+          esValido = false;
+          errorContraseña.innerText =
+            "Contraseña debe tener al menos 8 caracteres";
+        }
+
+        // Si todo esta ok, mostrar mensaje registro exitoso
+        if (esValido) {
+          registroExitoso.innerText = "Registro exitoso";
+        }
+      });
+    </script>
+  </body>
+</html>

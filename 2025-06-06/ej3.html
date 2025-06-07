@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 3</title>
+  </head>
+  <body>
+    <h1>Ejercicio 3</h1>
+    <ul id="lista"></ul>
+    <div id="promedio"></div>
+    <div id="mayor"></div>
+    <div id="menor"></div>
+    <form id="formulario">
+      <div>
+        <label for="numero">Numero:</label>
+        <input id="numero" name="numero" type="number" />
+        <div id="numero-error"></div>
+      </div>
+      <input type="submit" />
+    </form>
+    <script>
+      const numeros = [3, 6, 6, 7, 5, 4];
+
+      const agregarNumero = (numero) => {
+        const lista = document.getElementById("lista");
+        const item = document.createElement("li");
+        item.innerHTML = `${numero} - Es ${numero % 2 === 0 ? "par" : "impar"}`;
+        if (window.confirm("¿Desea quitar usuario?")) {
+          console.log("quitar");
+        } else {
+          console.log("no quitar");
+        }
+        lista.appendChild(item);
+      };
+
+      const calcularPromedio = () => {
+        const promedioMensaje = document.getElementById("promedio");
+        if (numeros.length === 0) {
+          promedioMensaje.innerHTML = "Promedio: Arreglo vacio";
+          return;
+        }
+
+        const sum = numeros.reduce(
+          (acumulador, numero) => acumulador + numero,
+          0
+        );
+        promedioMensaje.innerHTML = `Promedio: ${(sum / numeros.length).toFixed(
+          2
+        )}`;
+      };
+
+      const calcularMayor = () => {
+        const mayorMensaje = document.getElementById("mayor");
+        const mayor = numeros.reduce((mayor, numero) =>
+          numero > mayor ? numero : mayor
+        );
+        mayorMensaje.innerHTML = `Mayor: ${mayor}`;
+      };
+
+      const calcularMenor = () => {
+        const menorMensaje = document.getElementById("menor");
+        const menor = numeros.reduce((menor, numero) =>
+          numero < menor ? numero : menor
+        );
+        menorMensaje.innerHTML = `Menor: ${menor}`;
+      };
+
+      // Cargar datos al inicio
+      numeros.forEach((numero) => agregarNumero(numero));
+      calcularPromedio();
+      calcularMayor();
+      calcularMenor();
+
+      // Evento submit
+      const formulario = document.getElementById("formulario");
+      formulario.addEventListener("submit", (e) => {
+        const numeroError = document.getElementById("numero-error");
+
+        e.preventDefault();
+
+        // Limpiar mensajes
+        numeroError.innerHTML = "";
+
+        // Validar campos
+        const numero = Number(formulario.elements.numero.value);
+        if (numero <= 0) {
+          numeroError.innerHTML = "Número inválido";
+          return;
+        }
+
+        // Agregar numero al arreglo y a la lista
+        numeros.push(numero);
+        agregarNumero(numero);
+
+        // Recalcular
+        calcularPromedio();
+        calcularMayor();
+        calcularMenor();
+      });
+    </script>
+  </body>
+</html>
