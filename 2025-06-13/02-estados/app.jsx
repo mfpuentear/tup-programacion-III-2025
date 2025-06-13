@@ -6,12 +6,15 @@ function App() {
       <p>Cuenta: {cuenta}</p>
       <button
         onClick={() => {
-          console.log("incrementar:", cuenta);
+          // Importante!: cuenta no se modifica luego de llamar a setCuenta
+          console.log("incrementar (antes):", cuenta);
           setCuenta(cuenta + 1);
+          console.log("incrementar (despues):", cuenta);
         }}
       >
         Incrementar
       </button>
+      <button onClick={() => setCuenta((c) => c - 1)}>Decrementar</button>
     </>
   );
 }
