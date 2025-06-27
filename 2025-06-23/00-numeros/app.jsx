@@ -26,7 +26,19 @@ function App() {
       <h1>Listado de numeros</h1>
       <ul>
         {numeros.map((n, i) => (
-          <Item key={i} numero={n} />
+          <Item
+            key={i}
+            numero={n}
+            onBorrar={() => {
+              if (confirm(`¿Desea quitar el numero ${n} en posición ${i}?`)) {
+                // Llamar a setNumeros con un nuevo arreglo sin el numero en indice i
+                setNumeros(numeros.filter((n, idx) => idx != i));
+
+                // con toSpliced()
+                //setNumeros(numeros.toSpliced(i, 1));
+              }
+            }}
+          />
         ))}
       </ul>
 
@@ -43,10 +55,30 @@ function App() {
       </form>
 
       <h2>Calculos</h2>
-      <p>
-        Promedio:{" "}
-        {(numeros.reduce((acc, n) => acc + n, 0) / numeros.length).toFixed(2)}
-      </p>
+      {numeros.length === 0 ? (
+        <p>Arreglo sin numeros</p>
+      ) : (
+        <>
+          <p>
+            Promedio:{" "}
+            {(numeros.reduce((acc, n) => acc + n, 0) / numeros.length).toFixed(
+              2
+            )}
+          </p>
+          <p>
+            Mayor:{" "}
+            {numeros.reduce((mayor, numero) =>
+              numero > mayor ? numero : mayor
+            )}
+          </p>
+          <p>
+            Menor:{" "}
+            {numeros.reduce((menor, numero) =>
+              numero < menor ? numero : menor
+            )}
+          </p>
+        </>
+      )}
     </>
   );
 }
